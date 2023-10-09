@@ -17,6 +17,7 @@ on:
       - "*.sh"
 jobs:
   qemu-user-static:
+    environment: default
     runs-on: ubuntu-latest
     env:
       VERSION: 7.2.0-1
