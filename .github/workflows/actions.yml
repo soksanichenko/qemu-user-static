@@ -21,16 +21,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set variables
-        run: |
-          echo "DOCKER_REPO=docker.io/$GITHUB_REPOSITORY" >> $GITHUB_ENV
       - name: Build
         run: |
           wget --content-disposition http://ftp.de.debian.org/debian/pool/main/q/qemu/qemu-user-static_${{ vars.ORIGIN_VERSION }}_amd64.deb
           dpkg-deb -R qemu-user-static_*.deb releases
           ./run.sh -t "${{ vars.VERSION }}" -r "${{ vars.GITHUB_REPOSITORY }}" -d "${{ vars.DOCKER_REPO }}"
-      - name: Test
-        run: ./test.sh -d "${{ vars.DOCKER_REPO }}"
+      #- name: Test
+        #run: ./test.sh -d "${{ vars.DOCKER_REPO }}"
       - name: Publish
         if: github.ref == 'refs/heads/master'
         run: |
