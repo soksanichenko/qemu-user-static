@@ -1,5 +1,6 @@
 name: actions
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
